@@ -1,0 +1,128 @@
+<app-navbar></app-navbar>
+
+<section id="banner">
+  <div class="container">
+    <div class="row">
+      <div class="card" style="max-width: 100%!important;">
+        <h2 class="fw-bolder mb-4 text-center">Payment Confirmation</h2>
+        <div class="row justify-content-center" style="padding: 0%;">
+          <div class="col pt-0">
+
+            <form id="add-promo-form">
+              <div class="form-group">
+                <label>Select Promo Code</label>
+                <div *ngIf="!cart.usagePromo">
+                  <select name="namePromo" id="promo-select" class="form-select form-select-lg"
+                    aria-label=".form-select-lg example" [(ngModel)]="selectedPromo" (change)="applyPromo(cart._id)">
+                    <option value="">Promo Code</option>
+                    <option value="" disabled>───────────────</option>
+                    <option *ngFor="let element of user.promosList" [value]="getPromoById(element.promo)?._id">
+                      {{ getPromoById(element.promo)?.namePromo }}
+                    </option>
+                  </select>
+                </div>
+                <div *ngIf="cart.usagePromo">
+                  <select name="namePromo" id="promo-select" class="form-select form-select-lg"
+                    aria-label=".form-select-lg example" [(ngModel)]="selectedPromo" (change)="applyPromo(cart._id)">
+                    <option value="">Promo Code</option>
+                    <option value="" disabled>───────────────</option>
+                    <option value="no-promo">No Promo</option>
+                  </select>
+                </div>
+              </div>
+            </form>
+
+            <div *ngIf="events.length > 0 && cart">
+              <div>
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th class="col-1">Quantity</th>
+                      <th class="col-4">Name</th>
+                      <th class="col-1">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let event of events">
+                      <ng-container *ngFor="let item of cart.items">
+                        <ng-container *ngIf="item.eventId === event._id">
+                          <tr>
+                            <td>{{ item.quantity }}</td>
+                            <td>{{ event.name }}</td>
+                            <td>{{ event.price.toFixed(2).replace('.', ',') }}&euro;</td>
+                          </tr>
+                        </ng-container>
+                      </ng-container>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <p>
+                  <strong>Total:</strong>
+                  {{ cart.total.toFixed(2).replace('.', ',') }}&euro;
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row justify-content-center">
+          <form #formData="ngForm">
+            <div>
+              <div class="input-field" id="nameField">
+                <input type="text" required class="form-control" id="inputName" name="name" [(ngModel)]="name"
+                  #NameControl="ngModel" [value]="user.name" disabled>
+              </div>
+            </div>
+
+            <div>
+              <div class="input-field">
+                <input type="email" required class="form-control" id="inputEmail" name="email" [(ngModel)]="email"
+                  #emailControl="ngModel" [value]="user.email" disabled>
+              </div>
+            </div>
+
+            <div>
+              <div class="input-field" id="nameField">
+                <input type="text" required class="form-control" id="nomeCartao" placeholder="Nome no Cartão"
+                  name="nomeCartao" [(ngModel)]="nomeCartao" #NameControl="ngModel">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-field" id="nameField">
+                <input type="text" required class="form-control" id="numeroCartao" placeholder="Numero no Cartão"
+                  name="nomeCartao" pattern="[0-9]{4}[0-9]{4}[0-9]{4}[0-9]{4}" minlength="16" maxlength="16" required
+                  [(ngModel)]="numeroCartao" #NameControl="ngModel">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-field" id="nameField">
+                <input type="text" required class="form-control" id="expiracao" placeholder="Data de Expiração [MM/YY]"
+                  name="expiracao" pattern="[0-9]{2}/[0-9]{2}" maxlength="5" required [(ngModel)]="expiracao"
+                  #NameControl="ngModel">
+              </div>
+            </div>
+
+            <div>
+              <div class="input-field" id="nameField">
+                <input type="text" required class="form-control" id="cvv" placeholder="CVV" name="cvv"
+                  pattern="[0-9]{3}" minlength="3" maxlength="3" required [(ngModel)]="cvv" #NameControl="ngModel">
+              </div>
+            </div>
+
+            <div class="col-img text-center">
+              <img src="/assets/imagesUtils/cards.png" alt="">
+            </div>
+
+            <div class="btn-field justify-content-center mt-3 w-100">
+              <button type="submit" class="me-2" (click)="pay(cart._id)">Confirm</button>
+              <button type="submit" class="me-2" (click)="back()">Back</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+
+<ng-container *ngIf="error" class="text-center">
+    <div class="firstAlert col-md-5 col-md-offset-1 mx-auto">
+      <div class="alert alert-danger alert-dismissible fade show">
+        <h4 class="alert-heading"><i class="bi-exclamation-octagon-fill"></i> Oops! Something went wrong.</h4>
+        <ul class="error-text">
+          <li>{{ error }}</li>
+        </ul>
+      </div>
+    </div>
+</ng-container>
+  
+<div class="container mt-5">
+    <h1 id="title" class="text-center">Promos List</h1>
+
+    <div class="row search-container">
+        <label class="search-label">Search by name:</label>
+        <div class="input-group">
+          <input type="text" class="form-control search-input" placeholder="Search" [(ngModel)]="searchTerm" (input)="searchByName()">
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center row">
+        <div class="col-md-6" *ngFor="let info of filteredData  | slice:(page-1)*pageSize:page*pageSize">
+            <div class="coupon p-3 bg-white m-3">
+                <div class="row no-gutters">
+                    <div class="col-md-4 border-right">
+                        <div class="d-flex flex-column align-items-center"><span
+                                class="d-block">{{info.namePromo}}</span><span class="text-black-50">Quantity:
+                                {{info.quantity}}</span><span class="text-black-50">Points to Claim:
+                                {{info.points}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div>
+                            <div class="d-flex flex-row justify-content-end off">
+                                <h1>{{info.percentage.toFixed(2).replace('.', ',' )}} %</h1><span>OFF</span>
+                            </div>
+                            <div class="d-flex flex-row justify-content-between off px-3 p-2"><span></span><span><button
+                                        type="button" class="btn btn-primary" [disabled]="info.quantity === 0"
+                                        (click)="claimPromo(info)">Claim</button></span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="data.length"></ngb-pagination>
+    </div>
+</div>

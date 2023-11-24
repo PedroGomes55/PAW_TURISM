@@ -1,0 +1,73 @@
+<app-navbar></app-navbar>
+
+<div class="pb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                <h1 class="fw-bolder mb-4 text-center">My Cart</h1>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="p-2">Name</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2">Price</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2">Quantity</div>
+                                </th>
+                                <th scope="col" class="border-0 bg-light">
+                                    <div class="py-2">Remove</div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody class="align-baseline">
+                            <ng-container *ngIf="events.length > 0 && cart">
+                                <ng-container *ngFor="let event of events">
+                                    <ng-container *ngFor="let item of cart.items">
+                                        <ng-container *ngIf="item.eventId === event._id">
+                                            <tr>
+
+                                                <td>
+                                                    {{ event.name }} ({{event.typeTicket}})
+                                                </td>
+                                                <td>
+                                                    {{ (event.price * item.quantity).toFixed(2).replace('.',',') }} &euro;
+                                                </td>
+                                                <td>
+                                                    <form>
+                                                        <button type="button" name="action" value="decrease" class="btn btn-secondary" (click)="changeQuantity(cart._id, item._id, 'decrease')">-</button>
+                                                        <input type="number" name="quantity" [value]="item.quantity" min="1" [max]="event.totalNumberTickets" class="w-25 text-center" disabled>
+                                                        <button type="button" name="action" value="increase" class="btn btn-secondary" (click)="changeQuantity(cart._id, item._id, 'increase')">+</button>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <form>
+                                                        <button type="button" class="btn btn-outline-danger" (click)="delete(cart._id, item.eventId)">X</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </ng-container>
+                                    </ng-container>
+                                </ng-container>
+                                <tr>
+                                    <td colspan="3" class="text-right">
+                                        <strong>Total:</strong>
+                                    </td>
+                                    <td id="total-price">
+                                        {{ (cart.total).toFixed(2).replace('.', ',') }} &euro;
+                                    </td>
+                                </tr>
+                            </ng-container>
+                        </tbody>
+                    </table>
+                    <div class="btn-field justify-content-end">
+                        <button type="button" class="disable btn-secondary" style="flex-basis: 18%" (click)="payment()">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

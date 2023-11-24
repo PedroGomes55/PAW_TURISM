@@ -1,0 +1,210 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: sans-serif;
+    background-image: linear-gradient(to right, #39a8e0, #36448c);
+  }
+  
+  .navbar-brand {
+    font-weight: 600;
+    color: #36448c;
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    font-weight: 600;
+    color: #36448c;
+  }
+  
+  /*--------------- BANNER ---------------*/
+  
+  #banner {
+    padding-top: 0%;
+  }
+  
+  #banner ul li {
+    margin: 10px 0;
+  }
+  
+  #banner ul {
+    margin-left: 20px;
+  }
+  
+  .promo-title {
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 100px;
+    text-align: center;
+  }
+  
+  .container {
+    max-width: 1600px;
+    width: 100%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+  }
+  
+  .row{
+    /*height: 70%;
+    align-items: center;*/
+    justify-content: center;
+  }
+
+   .col-card {
+    margin: 35px 0px;
+    max-width: 1000px;
+    padding: 20px 20px 20px;
+    align-items: center;
+    max-width: 400px;
+  }
+  
+  .col {
+    margin: 35px 0px;
+    max-width: 1000px;
+    background: #fff;
+    padding: 20px 20px 20px;
+    align-items: center;
+  }
+  
+  .col-image{
+    margin: 35px 0px;
+    padding: 20px 20px 20px;
+    width: 450px; 
+    background-color: #fff;
+  }
+  
+  .col h1 {
+    font-size: 30px;
+    margin-bottom: 30px;
+    color: #36448c;
+    position: relative;
+    text-align: center;
+  }
+  
+  .col h1::after {
+    content: "";
+    width: 30px;
+    height: 4px;
+    border-radius: 3px;
+    background: #36448c;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .btn-field {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .btn-field button {
+    flex-basis: 48%;
+    background: #36448c;
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    transition: background 1s;
+  }
+  
+  .input-group {
+    height: 280px;
+  }
+  
+  .btn-field button.disable {
+    background: #eaeaea;
+    color: #555;
+  }
+  
+  .btn-field button.disable a {
+    text-decoration: none;
+    color: #36448c;
+  }
+  
+  .input-field{
+    background: #eaeaea;
+    margin: 15px 0;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    max-height: 65px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+  }
+  
+  input{
+    width: 100%;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    padding: 18px 15px;
+  
+  }
+  
+  .input-field i{
+    margin-left: 15px;
+    color: #999;
+  }
+  
+
+  .container-card{
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    padding: 5%;
+    padding-top: 2%;
+  }
+  
+  .container-card h1{
+    font-size: 40px;
+    margin-bottom: 30px;
+    color: #fff;
+    position: relative;
+    text-align: center;
+  }
+  
+  .container-card h1::after {
+    content: "";
+    width: 90px;
+    height: 7px;
+    border-radius: 3px;
+    background: #fff;
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .container-card a {
+    text-decoration: none;
+    color: #36448c;
+  }
+  
+  .btn-field-card{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .btn-field-card button {
+    flex-basis: 8%;
+    background: #fff;
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+  }
+  
+  .form-select{
+    background-color: #eaeaea;
+    color: #555;
+  }

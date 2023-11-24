@@ -1,0 +1,131 @@
+<app-navbar></app-navbar>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<section>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <div class="row g-0 rounded-circle img-fluid">
+                            <div class="col-sm-5" *ngIf="user.roles === 'Employee'">
+                                <img src="/assets/imagesUtils/admins.png" width="150px" height="150px" alt="avatar">
+                            </div>
+                            <div class="col-sm-5" *ngIf="user.roles === 'User'">
+                                <img src="/assets/imagesUtils/user.png" width="150px" height="150px">
+                            </div>
+                        </div>
+                        <h5 class="my-3">{{user.name}}</h5>
+                        <p class="text-muted mb-1">Welcome to Turismo ESTG!</p>
+                        <p class="text-muted mb-4">Thanks for being with us!</p>
+                    </div>
+                </div>
+                <div class="card mb-4 mb-lg-0">
+                    <div class="card-body p-0">
+                        <ul class="list-group list-group-flush rounded-3 text-center">
+                            <h4 id="title fw-bolder mb-4">Promos Claimed</h4>
+                            <div *ngIf="user.promosList && user.promosList.length > 0">
+                                <ul class="ps-2">
+                                    <li class="list-unstyled p-3" *ngFor="let elem of user.promosList">
+                                        <p class="mb-0 "><strong>Promo Name: </strong> {{
+                                            getPromoById(elem.promo)?.namePromo }}
+                                    </li>
+                                </ul>
+                            </div>
+                            <div *ngIf="!user.promosList || user.promosList.length === 0">
+                                <p>No promos claimed yet!</p>
+                            </div>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bolder mb-4">Full Name</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.name}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bolder mb-4">Email</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.email}}</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <p class="mb-0 fw-bolder mb-4">Current Points</p>
+                            </div>
+                            <div class="col-sm-9">
+                                <p class="text-muted mb-0">{{user.points}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h2 id="title" class="fw-bolder mb-4 text-center">Purchases Historic</h2>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light col-5">
+                                            <div class="p-2">Items</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light col-2">
+                                            <div class="p-2">Total</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light col-2">
+                                            <div class="p-2">Winning Points</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ng-container *ngFor="let purchase of purchases">
+                                        <tr>
+                                            <td class="col-5">
+                                                <table class="w-100">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="col-4" scope="col">Name</th>
+                                                            <th class="col-2" scope="col">Type</th>
+                                                            <th class="col-2" scope="col">Quantity</th>
+                                                            <th class="col-2" scope="col">Ticket</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let item of purchase.items">
+                                                            <td class="col-4">{{ item.nameItem }}</td>
+                                                            <td class="col-2">{{ item.typeItem }}</td>
+                                                            <td class="col-2">{{ item.quantityItem }}</td>
+                                                            <td class="col-2">
+                                                                <button class="btn btn-link"
+                                                                    (click)="generatePDF(mapPurchaseItems(item))">
+                                                                    <i class="fa fa-file-pdf"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td class="col-2">{{ purchase.total }} &euro;</td>
+                                            <td class="col-2">{{ purchase.winningPoints }}</td>
+                                        </tr>
+                                    </ng-container>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

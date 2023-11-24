@@ -1,0 +1,11 @@
+<%if (typeof error!='undefined' ) { %>
+    <div class="Error_Message">
+        <ul class="error-text">
+            <% error.forEach(function(error) { %>
+                <li>
+                    <%= error %>
+                </li>
+                <% }); %>
+        </ul>
+    </div>
+<% } %>

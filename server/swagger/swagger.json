@@ -1,0 +1,1035 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "TURISMO ESTG",
+        "description": "REST API for web tickets",
+        "contact": {
+            "email": "8190357@estg.ipp.pt"
+        }
+    },
+    "host": "localhost:3000",
+    "basePath": "/api/v1",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "API for users in the system"
+        },
+        {
+            "name": "Heritages",
+            "description": "API for heritages in the system"
+        },
+        {
+            "name": "Events",
+            "description": "API for events in the system"
+        },
+        {
+            "name": "Promos",
+            "description": "API for promos in the system"
+        }
+    ],
+    "schemes": [
+        "http"
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Logs user into the system",
+                "description": "",
+                "operationId": "login User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid email/password supplied"
+                    }
+                }
+            }
+        },
+        "/auth/signUp": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create user",
+                "description": "This can only be done by the logged in user.",
+                "operationId": "create User",
+                "produces": [
+                    "application/xml",
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Created user object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/auth/forgetPW": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Change password of user",
+                "description": "This can only be done by existing user.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Change password of user object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "default": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/auth/logout": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Logout user",
+                "description": "This can only be done by an logged user.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User logged out",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Gets all users",
+                "description": "Gets all users from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Users List",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/users/show/{id}": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Find user by ID",
+                "description": "Returns a single user by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of user to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User selected",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/users/edit/{id}": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Update an existing user",
+                "description": "Updates a valid user on the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Updated",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/users/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Deletes an user",
+                "description": "Deletes an user from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "User id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User deleted",
+                        "schema": {
+                            "$ref": "#/definitions/users"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/heritage": {
+            "get": {
+                "tags": [
+                    "Heritages"
+                ],
+                "summary": "Gets all heritages",
+                "description": "Gets all heritages from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Heritages List",
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/heritage/addHeritage": {
+            "post": {
+                "tags": [
+                    "Heritages"
+                ],
+                "summary": "Add a new heritage",
+                "description": "Add a new heritage to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Heritage object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Heritage Created",
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/heritage/show/{id}": {
+            "get": {
+                "tags": [
+                    "Heritages"
+                ],
+                "summary": "Find heritage by ID",
+                "description": "Returns a single heritage by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of heritage to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Heritage selected",
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Heritage not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/heritage/edit/{id}": {
+            "post": {
+                "tags": [
+                    "Heritages"
+                ],
+                "summary": "Update an existing heritage",
+                "description": "Updates a valid heritage on the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Heritage object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Heritage Updated",
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Heritage not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/heritage/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Heritages"
+                ],
+                "summary": "Deletes an heritage",
+                "description": "Deletes an heritage from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Heritage id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Heritage deleted",
+                        "schema": {
+                            "$ref": "#/definitions/heritage"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Heritage not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/events": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Gets all events",
+                "description": "Gets all events from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Events List",
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/events/addEvent": {
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Add a new event",
+                "description": "Add a new event to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Event object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event Created",
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/events/show/{id}": {
+            "get": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Find event by ID",
+                "description": "Returns a single event by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of event to return",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event selected",
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Event not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/events/edit/{id}": {
+            "post": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Update an existing event",
+                "description": "Updates a valid event on the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Event object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event Updated",
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Event not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/events/delete/{id}": {
+            "delete": {
+                "tags": [
+                    "Events"
+                ],
+                "summary": "Deletes an event",
+                "description": "Deletes an event from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Event id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Event deleted",
+                        "schema": {
+                            "$ref": "#/definitions/events"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Event not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/promos": {
+            "get": {
+                "tags": [
+                    "Promos"
+                ],
+                "summary": "Gets all promos",
+                "description": "Gets all promos from the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Promos List",
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/promos/addPromo": {
+            "post": {
+                "tags": [
+                    "Promos"
+                ],
+                "summary": "Add a new promo",
+                "description": "Add a new promo to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Promo object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Promo Created",
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    },
+                    "405": {
+                        "description": "Invalid input"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        },
+        "/promos/edit/{promoId}": {
+            "post": {
+                "tags": [
+                    "Promos"
+                ],
+                "summary": "Update an existing promo",
+                "description": "Updates a valid promo on the database.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Promo object that needs to be added to the database",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Promo Updated",
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Promo not found"
+                    },
+                    "405": {
+                        "description": "Validation exception"
+                    }
+                }
+            }
+        },
+        "/promos/delete/{promoId}": {
+            "delete": {
+                "tags": [
+                    "Promos"
+                ],
+                "summary": "Deletes an promo",
+                "description": "Deletes an promo from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Promo id to delete",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Promo deleted",
+                        "schema": {
+                            "$ref": "#/definitions/promos"
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid ID supplied"
+                    },
+                    "404": {
+                        "description": "Promo not found"
+                    }
+                },
+                "security": [
+                    {
+                        "item_jwt_auth": []
+                    }
+                ]
+            }
+        }
+    },
+    "securityScheme": {
+        "authentication": {
+            "type": "token",
+            "in": "header",
+            "name": "x-access-token"
+        }
+    },
+    "definitions": {
+        "users": {
+            "type": "object",
+            "required": [
+                "name",
+                "email",
+                "password"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "SuperMario15",
+                    "description": "Name of User"
+                },
+                "email": {
+                    "type": "string",
+                    "example": "supermario@gmail.com",
+                    "description": "Email of User"
+                },
+                "password": {
+                    "type": "string",
+                    "example": "super15mario",
+                    "description": "Password of User"
+                },
+                "roles": {
+                    "type": "string",
+                    "enum": [
+                        "Employee",
+                        "User"
+                    ]
+                },
+                "points": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "12",
+                    "description": "Points of User"
+                },
+                "createdDate": {
+                    "type": "date",
+                    "example": "2023-04-08T16:39:05.624+00:00",
+                    "description": "Creation Date of User"
+                }
+            }
+        },
+        "heritage": {
+            "type": "object",
+            "required": [
+                "heritageImg",
+                "name",
+                "address",
+                "type"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "heritageImg": {
+                    "type": "string",
+                    "description": "Image of Heritages"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "SuperMario15",
+                    "description": "Name of Heritages"
+                },
+                "address": {
+                    "type": "string",
+                    "example": "Rua das camélias, 45",
+                    "description": "Address of Heritages"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "Museu",
+                        "Parque de exposição",
+                        "Quinta",
+                        "Teatro",
+                        "Igreja",
+                        "Capela",
+                        "Aqueduto",
+                        "Castelo",
+                        "Palacio",
+                        "Farol",
+                        "Torre",
+                        "Estadio",
+                        "Ponte",
+                        "Zoo",
+                        "Oceanário",
+                        "Parque Natural"
+                    ],
+                    "description": "Type of Heritages"
+                },
+                "visitCounter": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "12",
+                    "description": "Visit Counter of Heritages"
+                }
+            }
+        },
+        "events": {
+            "type": "object",
+            "required": [
+                "heritageDestiny",
+                "eventImg",
+                "name",
+                "date",
+                "typeTicket",
+                "price",
+                "totalNumberTickets"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "heritageDestiny": {
+                    "type": "string",
+                    "example": "Zoo Lisboa",
+                    "description": "Name of the Heritage of this event"
+                },
+                "eventImg": {
+                    "type": "string",
+                    "description": "Image of Event"
+                },
+                "name": {
+                    "type": "string",
+                    "example": "Visita ao zoo de lisboa",
+                    "description": "Name of Event"
+                },
+                "date": {
+                    "type": "date",
+                    "example": "2023-05-01T00:00:00.000+00:00",
+                    "description": "Date of Event"
+                },
+                "typeTicket": {
+                    "type": "string",
+                    "description": "Type of Event"
+                },
+                "price": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "10",
+                    "description": "Price of Event"
+                },
+                "totalNumberTickets": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "10",
+                    "description": "Total Number of Tickets of Event"
+                }
+            }
+        },
+        "promos": {
+            "type": "object",
+            "required": [
+                "namePromo",
+                "quantity",
+                "percentage"
+            ],
+            "properties": {
+                "_id": {
+                    "type": "string"
+                },
+                "namePromo": {
+                    "type": "string",
+                    "example": "Promo de verão 22/23",
+                    "description": "Name of Promo"
+                },
+                "quantity": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "10",
+                    "description": "Quantity of Promo"
+                },
+                "percentage": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": "15",
+                    "description": "Percentage of Promo"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>TURISMO ESTG</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="/stylesheets/users.css">
+    <link rel="icon" href="/images/imagesUtils//logo-turismo-estg.png" type="image/x-icon" />
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/heritage">TURISMO ESTG</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/heritage">Heritages</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/users">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/events">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/promos">Promos</a>
+                      </li>
+                </ul>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/users/profile"><img src="/images/imagesUtils/user.png" width="30px" height="30px"></a>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/shopping-cart"><i class="bi bi-cart-fill"></i></a>
+                      </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/auth/logout">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <%- include ('../partials/partialErrors.ejs') %>
+
+    <section id="banner">
+        <div class="container">
+            <div class="row">
+                <div class="card" style="max-width: 800px; max-height: 800px;">
+                    <div class="row g-0">
+                        <div class="col-sm-7 align-self-center p-3">
+                            <form action="/promos/edit/<%= promo._id %>" method="post">
+                                <h5 class="card-title"><strong>ID:</strong> <%=promo._id%></h5>
+
+                                <div class="input-field">
+                                    <input type="number" value="<%= promo.quantity %>" name="quantity" min="0">
+                                </div>
+
+                                <div class="input-field">
+                                  <input type="text" value="<%= promo.namePromo %>" name="namePromo">
+                                </div>
+                              
+                                <div class="input-field">
+                                  <input type="number" value="<%= promo.percentage %>" name="percentage" min="0" max="100" step="0.01">
+                                </div>
+
+                                <div class="input-field">
+                                    <input type="number" value="<%= promo.points %>" name="points" min="0" step="0.01">
+                                </div>
+                              
+                                <div class="btn-field">
+                                  <button type="submit">Save</button>
+                                  <button type="button" class="disable"><a href="/promos">Back</a></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+</body>
+
+</html>

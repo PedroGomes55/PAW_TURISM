@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<section id="banner">
+    <div class="container-card">
+        <h1 class="fw-bolder mb-4 text-center">Heritage List</h1>
+        
+        <div class="mb-3">
+            <label for="heritageType" class="form-label">Select Heritage Type</label>
+            <select class="form-select" id="heritageType" [(ngModel)]="selectedType" (change)="getAll()">
+                <option value="">All</option>
+                <option value="Museu">Museu</option>
+                <option value="Parque de exposição">Parque de exposição</option>
+                <option value="Quinta">Quinta</option>
+                <option value="Teatro">Teatro</option>
+                <option value="Igreja">Igreja</option>
+                <option value="Capela">Capela</option>
+                <option value="Aqueduto">Aqueduto</option>
+                <option value="Castelo">Castelo</option>
+                <option value="Palacio">Palacio</option>
+                <option value="Farol">Farol</option>
+                <option value="Torre">Torre</option>
+                <option value="Estadio">Estadio</option>
+                <option value="Ponte">Ponte</option>
+                <option value="Zoo">Zoo</option>
+                <option value="Oceanário">Oceanário</option>
+                <option value="Parque Natural">Parque Natural</option>
+            </select>
+        </div>
+
+        <div class="row row-cols-md-3 row-cols-xl-4 g-4">
+            <div class="d-flex justify-content-center" *ngFor="let info of data">
+                <div class="col-card d-flex">
+                    <div class="card">
+                        <img src="http://127.0.0.1:3000/images/uploads/heritage/{{info.heritageImg}}"
+                            class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">{{info.name}}</h5>
+                            <p class="card-text">Type: {{info.type}}</p>
+                            <button type="button" class="btn btn-primary" (click)="goToDetails(info._id)">More Info</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

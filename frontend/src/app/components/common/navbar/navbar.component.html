@@ -1,0 +1,67 @@
+<ng-template #content let-c="close" let-d="dismiss">
+	<div class="modal-header">
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>Are you sure you want to delete account?</p>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-danger" (click)="deleteAccountButton(user._id)">Delete</button>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Cross click')">Cancel</button>
+	</div>
+</ng-template>
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <!--<a class="navbar-brand" href="/heritage">TURISMO ESTG</a>-->
+        <a class="navbar-brand" href="/heritage">
+            <div class="row align-items-end gx-0 pt-0 justify-content-center mb-4">
+                <div class="col-auto">
+                    <img src="/assets/imagesUtils/logo-turismo-estg.png" width="60px" height="60px">
+                </div>
+                <div class="col-auto">
+                    <h2 class="my-auto">urismo ESTG</h2>
+                </div>
+            </div>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/heritage">Heritages</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/promos">Promos</a>
+                </li>
+            </ul>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <div ngbDropdown class="d-inline-block">
+                        <button type="button" class="nav-link btn shadow-none" id="dropdownBasic1" ngbDropdownToggle>
+                          {{user.name}} <img src="/assets/imagesUtils/user.png" width="30px" height="30px">
+                        </button>
+                        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <p class="text-center"><strong>{{user.name}}</strong></p>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item" (click)="profileButton()">Profile</button>
+                          <button class="dropdown-item" (click)="editProfileButton(user._id)">Edit Profile</button>
+                          <div class="dropdown-divider"></div>
+                          <button class="dropdown-item" (click)="deleteAccountButtonModal(content)">Delete Account</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/cart"><i class="bi bi-cart-fill"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" (click)="logout()" href="">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

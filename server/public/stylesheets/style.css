@@ -1,0 +1,105 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+  font-family: sans-serif;
+  background-image: linear-gradient(to right, #39a8e0, #36448c);
+}
+
+.navbar-brand {
+  font-weight: 600;
+  color: #36448c;
+}
+.navbar-expand-lg .navbar-nav .nav-link {
+  font-weight: 600;
+  color: #36448c;
+}
+
+/*--------------- BANNER ---------------*/
+
+#banner{
+  color: #ffffff;
+  padding-top: 0%;
+}
+
+#banner ul li{
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+#banner ul{
+  margin-left: 20px;
+}
+
+.promo-title{
+  font-size: 25px;
+  font-weight: 600;
+  margin-top: 100px;
+}
+
+.play-btn{
+  width: 45px;
+  margin: 20px;
+}
+
+.bottom-img{
+  width: 100%;
+}
+
+/*--------------- ABOUT US ---------------*/
+
+#about-us{
+  background-image: linear-gradient(to right, #39a8e0, #36448c);
+  color: #fff;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.about-title{
+  font-size: 40px;
+  font-weight: 600;
+  margin-top: 8%;
+}
+
+#about-us ul li{
+  margin: 10px 0;
+}
+
+#about-us ul{
+  margin-left: 20px;
+}
+
+/*--------------- footer ---------------*/
+
+#footer{
+  background-image: linear-gradient(to right, #39a8e0, #36448c);
+  color: #fff;
+}
+
+.footer-img{
+  width: 100%;
+}
+
+.footer-box img{
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+.icons img{
+  width: 60px;
+  transition: 0.5s;
+}
+.icons a:hover img{
+  transform: translateY(-10px);
+}
+
+.iconsL img{
+  width: 45px;
+  transition: 0.5s;
+}
+.iconsL a:hover img{
+  transform: translateY(-10px);
+}
